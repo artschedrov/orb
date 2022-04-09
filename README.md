@@ -1,1 +1,2 @@
-# servers-monitor-project
+# Palantir
+Very simple server manager
