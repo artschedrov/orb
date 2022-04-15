@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class ServerApplication {
@@ -16,6 +17,7 @@ public class ServerApplication {
 
 	}
 
+	@Bean
 	CommandLineRunner run(ServerRepo serverRepo) {
 		return args -> {
 			serverRepo.save(new Server(
