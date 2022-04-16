@@ -15,6 +15,7 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Collection;
+import java.util.Random;
 
 import static com.example.server.enumeration.Status.SERVER_DOWN;
 import static com.example.server.enumeration.Status.SERVER_UP;
@@ -69,7 +70,10 @@ public class ServerImplementation implements ServerService {
     }
 
     private String setServerImageUrl() {
+        //String[] imageNames = {"server1.png", "server2.png", "server3.png"};
         String imageName = "server.png";
-        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/server/image" + imageName).toString();
+        return ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/server/image/" + imageName).toUriString();
     }
 }

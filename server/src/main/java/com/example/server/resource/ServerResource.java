@@ -81,6 +81,19 @@ public class ServerResource {
         );
     }
 
+    @PatchMapping("/update")
+    public ResponseEntity<Response> updateServer(@RequestBody @Valid Server server) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("server", serverService.update(server)))
+                        .message("Server updated")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Response> deleteServer(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
