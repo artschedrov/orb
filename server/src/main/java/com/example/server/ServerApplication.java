@@ -3,11 +3,13 @@ package com.example.server;
 import com.example.server.enumeration.Status;
 import com.example.server.model.Server;
 import com.example.server.repo.ServerRepo;
+import org.apache.catalina.filters.CorsFilter;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @SpringBootApplication
 public class ServerApplication {
@@ -40,5 +42,10 @@ public class ServerApplication {
 			));
 		};
 	}
+
+//	@Bean
+//	public CorsFilter corsFilter() {
+//		UrlBasedCorsConfigurationSource
+//	}
 
 }
