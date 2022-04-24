@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   constructor(private serverService: ServerService) {}
 
   ngOnInit(): void {
-    this.appState$ = this.serverService.servers$
+    this.appState$ = this.serverService.getServers()
     .pipe(
       map(response => {
         return { dataState: DataState.LOADED, appData: response}

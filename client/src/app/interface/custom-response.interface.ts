@@ -6,5 +6,5 @@ export interface CustomResponse {
     status: string;
     reason: string;
     message: string;
-    data: { servers: Server[], server: Server}
+    data: { servers?: Server[], server?: Server}
 }
