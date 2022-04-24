@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { catchError, map, Observable, of, startWith } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, startWith } from 'rxjs';
 import { DataState } from './enum/data-state.enum';
 import { AppState } from './interface/app-state.interface';
 import { CustomResponse } from './interface/custom-response.interface';
@@ -12,9 +12,15 @@ import { ServerService } from './service/server.service';
 })
 export class AppComponent implements OnInit {
 
-  title = 'client';
-  appState$!: Observable<AppState<CustomResponse>>;
+  title = 'Main Page';
+  appState$: Observable<AppState<CustomResponse>>;
   readonly DataState = DataState;
+  private filterSubject = new BehaviorSubject<string>('');
+  private dataSubject = new BehaviorSubject<CustomResponse>(null);
+  filterStatus$ = this.filterSubject.asObservable(); 
+
+  spinnerWorking: boolean = false;
+
 
   constructor(private serverService: ServerService) {}
 
@@ -22,11 +28,35 @@ export class AppComponent implements OnInit {
     this.appState$ = this.serverService.getServers()
     .pipe(
       map(response => {
+        this.dataSubject.next(response);
         return { dataState: DataState.LOADED, appData: response}
       }), 
       startWith({ dataState: DataState.LOADING}), 
       catchError((error: string) => {
         return of({ dataState: DataState.ERROR, error })
       }))
+  }
+
+  pingServer(ipAddress: string): void {
+    this.filterSubject.next(ipAddress);
+    if (this.filterStatus$) {
+      this.spinnerWorking === true;
+    }
+    this.appState$ = this.serverService.pingServer(ipAddress).pipe(
+      map(response => {
+        const index = this.dataSubject.value.data.servers.findIndex( server => server.id === response.data.server.id);
+        this.dataSubject.value.data.servers[index] = response.data.server;
+        this.filterSubject.next('');
+        if (!this.filterStatus$) {
+          this.spinnerWorking === false;
+        }
+        return { dataState: DataState.LOADED, appData: this.dataSubject.value }
+      }),
+      startWith({ dataState: DataState.LOADED, appData: this.dataSubject.value }),
+      catchError((error: string) => {
+        this.filterSubject.next('');
+        return of({ dataState: DataState.ERROR, error })
+      })
+    );
   }
 }

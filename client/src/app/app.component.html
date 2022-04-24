@@ -1,5 +1,15 @@
-<div>
-    <div>
+<div style="background-color: gainsboro;">
+    <div style="border-bottom: 1px solid; display: flex; justify-content: space-between; align-items: center; background-color: white;">
+        <div style="display: flex; align-items: center;">
+            <img src="../assets/image/orb-logo.png" alt="" style="width: 50px;">
+            <h1 style="margin: 5px 0 5px 10px;">Orb</h1>
+        </div>
+        <div>
+            <button mat-raised-button>Filter</button>
+            <button mat-raised-button>Add server</button>
+        </div>
+    </div>
+    <div style="background-color: white; margin-top: 5px;">
         <div class="table__title">
             <div class="table__row">
                 <div class="">
@@ -28,9 +38,27 @@
                             <td>{{ server.name }}</td>
                             <td>{{ server.memory }}</td>
                             <td>{{ server.type }}</td>
-                            <td>{{ server.status }}</td>
+                            <td>
+                                <div *ngIf="server.status == 'SERVER_UP'; else elseBlock">
+                                    <img src="../assets/image/orb-green.svg" alt="" width="48" height="48">
+                                </div>
+                                <ng-template #elseBlock>
+                                    <img src="../assets/image/orb-red.svg" alt="" width="48" height="48">
+                                </ng-template>
+                            </td>
+                            <td>
+                                <button mat-raised-button (click)="pingServer(server.ipAddress)"> Ping
+                                    <i class="material-icons" *ngIf="(filterStatus$ | async) === '' || (filterStatus$ | async) !== server.ipAddress" title="Ping">&#xe328;</i>
+                                    <i class="material-icons" *ngIf="(filterStatus$ | async) === server.ipAddress" title="Check">cached</i>
+                                </button>
+                            </td>
+                            <td>
+                                <button mat-raised-button color="warn"> Delete
+                                    <i class="material-icons">delete</i>
+                                </button>
+                            </td>
                         </tr>
-                    </tbody>
+                    </tbody> 
                 </table>
             </ng-container>
         </ng-container>

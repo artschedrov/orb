@@ -22,7 +22,7 @@ export class ServerService {
   // .pipe(tap(console.log), catchError(this.handleError));
 
   // ping$ = (ipAddress: string) => <Observable<CustomResponse>>
-  // this.http.get<CustomResponse>(`${this.apiUrl}/server/ping/${ipAddress}`)
+  // this.http.get<CustomResponse>(`${this.apiUrl}/server/path/${ipAddress}`)
   // .pipe(tap(console.log), catchError(this.handleError));
 
   // delete$ = (serverId: number) => <Observable<CustomResponse>>
@@ -40,7 +40,7 @@ export class ServerService {
   }
 
   pingServer(ipAddress: string): Observable<CustomResponse> {
-    return this.http.get<CustomResponse>(`${this.apiUrl}/server/ping/${ipAddress}`)
+    return this.http.get<CustomResponse>(`${this.apiUrl}/server/path/${ipAddress}`)
     .pipe(tap(console.log), catchError(this.handleError));
   }
 
