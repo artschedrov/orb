@@ -30,7 +30,7 @@ public class ServerImplementation implements ServerService {
     @Override
     public Server create(Server server) {
         log.info("Saving new server: {}", server.getName());
-        server.setImageUrl(setServerImageUrl());
+        //server.setImageUrl(setServerImageUrl());
         return serverRepo.save(server);
     }
 
@@ -67,13 +67,5 @@ public class ServerImplementation implements ServerService {
         log.info("Deleting server by ID: {}", id);
         serverRepo.deleteById(id);
         return Boolean.TRUE;
-    }
-
-    private String setServerImageUrl() {
-        //String[] imageNames = {"server1.png", "server2.png", "server3.png"};
-        String imageName = "server.png";
-        return ServletUriComponentsBuilder
-                .fromCurrentContextPath()
-                .path("/server/image/" + imageName).toUriString();
     }
 }

@@ -31,7 +31,7 @@ public class ServerResource {
 
     @GetMapping("/list")
     public ResponseEntity<Response> getServers() throws InterruptedException {
-        //TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(3);
         return ResponseEntity.ok(
                 Response.builder()
                     .timeStamp(now())
@@ -107,10 +107,5 @@ public class ServerResource {
                         .statusCode(OK.value())
                         .build()
         );
-    }
-
-    @GetMapping(path = "/image/{fileName}", produces = IMAGE_PNG_VALUE)
-    public byte[] getServerImage(@PathVariable("fileName") String fileName) throws IOException {
-        return Files.readAllBytes(Paths.get(System.getProperty("user.home") + "Downloads/images" + fileName));
     }
 }
