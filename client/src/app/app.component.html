@@ -1,27 +1,23 @@
-<div style="background-color: gainsboro;">
+<div>
     <div style="border-bottom: 1px solid; display: flex; justify-content: space-between; align-items: center; background-color: white;">
         <div style="display: flex; align-items: center;">
             <img src="../assets/image/orb-logo.png" alt="" style="width: 50px;">
-            <h1 style="margin: 5px 0 5px 10px;">Orb</h1>
+            <h1 style="margin: 5px 0 5px 10px;">Orb: Server Manager</h1>
         </div>
         <div>
             <button mat-raised-button>Filter</button>
             <button mat-raised-button>Add server</button>
         </div>
     </div>
-    <div style="background-color: white; margin-top: 5px;">
-        <div class="table__title">
-            <div class="table__row">
-                <div class="">
-                    <h2>Manage servers</h2>
-                </div>
-            </div>
-        </div>
+    <div style="background-color: white;">
         <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
             <ng-container *ngSwitchCase="DataState.LOADING">
-                <img src="../assets/image/orb-logo.png" alt="">
+                <div style="position: absolute; top: 50%; left: 50%;">
+                    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                </div>
             </ng-container>
             <ng-container *ngSwitchCase="DataState.LOADED">
+                
                 <table>
                     <thead>
                         <th> </th>
@@ -47,13 +43,13 @@
                                 </ng-template>
                             </td>
                             <td>
-                                <button mat-raised-button (click)="pingServer(server.ipAddress)"> Ping
+                                <button mat-raised-button (click)="pingServer(server.ipAddress)">
                                     <i class="material-icons" *ngIf="(filterStatus$ | async) === '' || (filterStatus$ | async) !== server.ipAddress" title="Ping">&#xe328;</i>
                                     <i class="material-icons" *ngIf="(filterStatus$ | async) === server.ipAddress" title="Check">cached</i>
                                 </button>
                             </td>
                             <td>
-                                <button mat-raised-button color="warn"> Delete
+                                <button mat-raised-button color="warn">
                                     <i class="material-icons">delete</i>
                                 </button>
                             </td>
