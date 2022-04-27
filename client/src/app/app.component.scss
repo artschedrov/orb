@@ -20,11 +20,12 @@
   background-color: #fff;
   display: flex;
   margin: 40px 10px 0 10px;
+  align-items: flex-start;
 }
 
 .servers-table {
   width: 80%;
-  margin: 0 5px;
+  margin: 0 10px;
 
   &__head-title {
     text-align: left;
@@ -41,6 +42,5 @@
 
 .terminal {
   //display: none;
-  background-color: aquamarine;
   width: 70%;
 }
