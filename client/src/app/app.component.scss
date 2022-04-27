@@ -1,3 +1,46 @@
 .mat-spinner::ng-deep circle {
     fill: #fff;
   }
+
+.servers-navbar {
+  border-bottom: 2px solid #B2B0B0; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  background-color: white;
+
+  &__logo {
+    display: flex; 
+    align-items: center;
+    margin: 10px 0 10px 10px;
+  }
+}
+
+.servers-container {
+  background-color: #fff;
+  display: flex;
+  margin: 40px 10px 0 10px;
+}
+
+.servers-table {
+  width: 80%;
+  margin: 0 5px;
+
+  &__head-title {
+    text-align: left;
+  }
+
+  &__body {
+    width: 80%;
+  }
+
+  &__button-wrap {
+    width: 5%;
+  }
+}
+
+.terminal {
+  //display: none;
+  background-color: aquamarine;
+  width: 70%;
+}

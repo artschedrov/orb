@@ -17,9 +17,9 @@ export class AppComponent implements OnInit {
   readonly DataState = DataState;
   private filterSubject = new BehaviorSubject<string>('');
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
-  filterStatus$ = this.filterSubject.asObservable(); 
+  filterStatus$ = this.filterSubject.asObservable();
 
-  spinnerWorking: boolean = false;
+  viewTerminal: boolean = false;
 
 
   constructor(private serverService: ServerService) {}
@@ -39,17 +39,11 @@ export class AppComponent implements OnInit {
 
   pingServer(ipAddress: string): void {
     this.filterSubject.next(ipAddress);
-    if (this.filterStatus$) {
-      this.spinnerWorking === true;
-    }
     this.appState$ = this.serverService.pingServer(ipAddress).pipe(
       map(response => {
         const index = this.dataSubject.value.data.servers.findIndex( server => server.id === response.data.server.id);
         this.dataSubject.value.data.servers[index] = response.data.server;
         this.filterSubject.next('');
-        if (!this.filterStatus$) {
-          this.spinnerWorking === false;
-        }
         return { dataState: DataState.LOADED, appData: this.dataSubject.value }
       }),
       startWith({ dataState: DataState.LOADED, appData: this.dataSubject.value }),
@@ -58,5 +52,15 @@ export class AppComponent implements OnInit {
         return of({ dataState: DataState.ERROR, error })
       })
     );
+  }
+
+  toggleTerminal() {
+    if(this.viewTerminal) {
+      this.viewTerminal = false;
+      console.log('f')
+    } else {
+      this.viewTerminal = true;
+      console.log('t')
+    }
   }
 }
