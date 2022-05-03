@@ -4,11 +4,15 @@
             <img src="../assets/image/orb-logo.png" alt="" style="width: 50px;">
             <h1 style="margin: 5px 0 5px 10px;">Orb: Server Manager</h1>
         </div>
-        <div>
+        <div class="buttons-nav__wrap">
             <button mat-raised-button>Filter</button>
             <button mat-raised-button>Add server</button>
-            <button mat-raised-button (click)="toggleTerminal()" title="Terminal">Terminal
-                <!-- <i class="material-icons">featured_play_list</i> -->
+            <button 
+            mat-raised-button 
+            (click)="toggleTerminal()" 
+            title="Terminal"
+            [ngStyle]="(viewTerminal === true) ? {'background': '#2DD700'} : {'background': 'white'}"
+            >Terminal
             </button>
         </div>
     </div>
@@ -20,53 +24,62 @@
                 </div>
             </ng-container>
             <ng-container *ngSwitchCase="DataState.LOADED">
+                <div class="servers__wrap">
+                    <table class="servers-table">
+                        <thead class="servers-table__head">
+                            <th class="servers-table__head-title"> </th>
+                            <th class="servers-table__head-title">IP Address</th>
+                            <th class="servers-table__head-title">Name</th>
+                            <th class="servers-table__head-title">Memory</th>
+                            <th class="servers-table__head-title">Type</th>
+                            <th class="servers-table__head-title">Status</th>
+                            <th class="servers-table__head-title"> </th>
+                            <th class="servers-table__head-title"> </th>
+                            <th class="servers-table__head-title"> </th>
+                        </thead>
+                        <tbody class="servers-table__body" *ngFor="let server of appState.appData.data.servers; let i = index">
+                            <tr>
+                                <td><img src="../assets/image/server.png" alt="server.name" width="40" height="40"></td>
+                                <td>{{ server.ipAddress }}</td>
+                                <td>{{ server.name }}</td>
+                                <td>{{ server.memory }}</td>
+                                <td>{{ server.type }}</td>
+                                <td>
+                                    <div *ngIf="server.status == 'SERVER_UP'; else elseBlock">
+                                        <img src="../assets/image/orb-green.svg" alt="" width="48" height="48">
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <img src="../assets/image/orb-red.svg" alt="" width="48" height="48">
+                                    </ng-template>
+                                </td>
+                                <td class="servers-table__button-wrap">
+                                    <button mat-raised-button (click)="pingServer(server.ipAddress)">
+                                        <i class="material-icons" *ngIf="(filterStatus$ | async) === '' || (filterStatus$ | async) !== server.ipAddress" title="Ping">&#xe328;</i>
+                                        <i class="material-icons" *ngIf="(filterStatus$ | async) === server.ipAddress" title="Check">cached</i>
+                                    </button>
+                                </td>
+                                <td class="servers-table__button-wrap">
+                                    <button mat-raised-button>
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                                <td class="servers-table__button-wrap">
+                                    <button mat-raised-button color="warn">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody> 
+                    </table>
+                </div>
                 
-                <table class="servers-table">
-                    <thead>
-                        <th class="servers-table__head-title"> </th>
-                        <th class="servers-table__head-title">IP Address</th>
-                        <th class="servers-table__head-title">Name</th>
-                        <th class="servers-table__head-title">Memory</th>
-                        <th class="servers-table__head-title">Type</th>
-                        <th class="servers-table__head-title">Status</th>
-                    </thead>
-                    <tbody class="servers-table__body" *ngFor="let server of appState.appData.data.servers; let i = index">
-                        <tr>
-                            <td><img src="../assets/image/server.png" alt="server.name" width="40" height="40"></td>
-                            <td>{{ server.ipAddress }}</td>
-                            <td>{{ server.name }}</td>
-                            <td>{{ server.memory }}</td>
-                            <td>{{ server.type }}</td>
-                            <td>
-                                <div *ngIf="server.status == 'SERVER_UP'; else elseBlock">
-                                    <img src="../assets/image/orb-green.svg" alt="" width="48" height="48">
-                                </div>
-                                <ng-template #elseBlock>
-                                    <img src="../assets/image/orb-red.svg" alt="" width="48" height="48">
-                                </ng-template>
-                            </td>
-                            <td class="servers-table__button-wrap">
-                                <button mat-raised-button (click)="pingServer(server.ipAddress)">
-                                    <i class="material-icons" *ngIf="(filterStatus$ | async) === '' || (filterStatus$ | async) !== server.ipAddress" title="Ping">&#xe328;</i>
-                                    <i class="material-icons" *ngIf="(filterStatus$ | async) === server.ipAddress" title="Check">cached</i>
-                                </button>
-                            </td>
-                            <td class="servers-table__button-wrap">
-                                <button mat-raised-button>
-                                    <i class="material-icons">edit</i>
-                                </button>
-                            </td>
-                            <td class="servers-table__button-wrap">
-                                <button mat-raised-button color="warn">
-                                    <i class="material-icons">delete</i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody> 
-                </table>
+                
                 <ng-container *ngIf="viewTerminal">
-                    <div class="terminal">
-                        <iframe src="http://localhost:8081/" frameborder="0" width="100%" height="600"></iframe>
+                    <div 
+                    class="terminal" 
+                    [ngStyle]="(viewTerminal === true) ? {'display': 'block'} : {'display': 'none'}"
+                    >
+                        <iframe src="http://localhost:8081/" frameborder="0" width="100%" height="300"></iframe>
                     </div>
                 </ng-container>
             </ng-container>

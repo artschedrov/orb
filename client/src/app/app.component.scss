@@ -1,6 +1,17 @@
 .mat-spinner::ng-deep circle {
     fill: #fff;
+}
+
+.servers {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__wrap {
+    height: 100%;
+    overflow: auto;
   }
+}
 
 .servers-navbar {
   border-bottom: 2px solid #B2B0B0; 
@@ -16,16 +27,37 @@
   }
 }
 
+.buttons-nav__wrap {
+  button {
+    margin-left: 20px;
+
+  }
+
+  :last-child {
+    margin-right: 20px;
+  }
+
+}
+
 .servers-container {
   background-color: #fff;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 40px 10px 0 10px;
-  align-items: flex-start;
+  height: 100%;
+  overflow: hidden;
 }
 
 .servers-table {
-  width: 80%;
   margin: 0 10px;
+
+  &__head {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+
+  }
 
   &__head-title {
     text-align: left;
@@ -41,6 +73,5 @@
 }
 
 .terminal {
-  //display: none;
-  width: 70%;
+  width: 100%;
 }
