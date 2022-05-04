@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
-import { MatMenuModule } from '@angular/material/menu'
-import { MatFormFieldModule } from '@angular/material/form-field'
 
 @NgModule({
   declarations: [
@@ -20,9 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatFormFieldModule
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
