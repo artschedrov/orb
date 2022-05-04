@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
 
   viewTerminal: boolean = false;
   addingServer: boolean = false;
+  panelOpenState = false;
 
 
   constructor(private serverService: ServerService) {}
