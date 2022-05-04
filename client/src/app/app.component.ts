@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { BehaviorSubject, catchError, map, Observable, of, startWith } from 'rxjs';
 import { DataState } from './enum/data-state.enum';
+import { Status } from './enum/status.enum';
 import { AppState } from './interface/app-state.interface';
 import { CustomResponse } from './interface/custom-response.interface';
+import { Server } from './interface/server.interface';
 import { ServerService } from './service/server.service';
 
 @Component({
@@ -15,17 +18,19 @@ export class AppComponent implements OnInit {
   title = 'Main Page';
   appState$: Observable<AppState<CustomResponse>>;
   readonly DataState = DataState;
+  readonly Status = Status;
   private filterSubject = new BehaviorSubject<string>('');
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
   filterStatus$ = this.filterSubject.asObservable();
 
   viewTerminal: boolean = false;
+  addingServer: boolean = false;
 
 
   constructor(private serverService: ServerService) {}
 
   ngOnInit(): void {
-    this.appState$ = this.serverService.getServers()
+    this.appState$ = this.serverService.servers$
     .pipe(
       map(response => {
         this.dataSubject.next(response);
@@ -54,13 +59,39 @@ export class AppComponent implements OnInit {
     );
   }
 
+  saveServer(serverForm: NgForm): void {
+    this.appState$ = this.serverService.saveServer(serverForm.value as Server)
+    .pipe(
+      map(response => {
+        this.dataSubject.next({
+          ...response, data: { servers: [response.data.server, ...this.dataSubject.value.data.servers]}
+        });
+        serverForm.resetForm({ status: this.Status.SERVER_DOWN})
+        return { dataState: DataState.LOADED, appData: this.dataSubject.value }
+      }),
+      startWith({ dataState: DataState.LOADED, appData: this.dataSubject.value }),
+      catchError((error: string) => {
+        this.filterSubject.next('');
+        return of({ dataState: DataState.ERROR, error })
+      })
+    );
+  }
+
   toggleTerminal() {
     if(this.viewTerminal) {
       this.viewTerminal = false;
-      console.log('f')
     } else {
       this.viewTerminal = true;
-      console.log('t')
+      this.addingServer = false;
+    }
+  } 
+
+  addServer() {
+    if(this.addingServer) {
+      this.addingServer = false;
+    } else {
+      this.addingServer = true;
+      this.viewTerminal = false;
     }
   }
 }

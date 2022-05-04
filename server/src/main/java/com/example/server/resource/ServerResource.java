@@ -3,7 +3,6 @@ package com.example.server.resource;
 import com.example.server.enumeration.Status;
 import com.example.server.model.Response;
 import com.example.server.model.Server;
-import com.example.server.service.ServerService;
 import com.example.server.service.implementation.ServerImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,17 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import static java.time.LocalDateTime.now;
 import static java.util.Map.of;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 
 @RestController
 @RequestMapping("/server")
@@ -30,7 +23,7 @@ public class ServerResource {
     private final ServerImplementation serverService;
 
     @GetMapping("/list")
-    public ResponseEntity<Response> getServers() throws InterruptedException {
+    public ResponseEntity<Response> getServers() {
             //TimeUnit.SECONDS.sleep(3);
         return ResponseEntity.ok(
                 Response.builder()

@@ -1,6 +1,5 @@
 package com.example.server.service.implementation;
 
-import com.example.server.enumeration.Status;
 import com.example.server.model.Server;
 import com.example.server.repo.ServerRepo;
 import com.example.server.service.ServerService;
@@ -8,18 +7,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
-import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Collection;
-import java.util.Random;
 
 import static com.example.server.enumeration.Status.SERVER_DOWN;
 import static com.example.server.enumeration.Status.SERVER_UP;
-import static java.util.List.of;
 
 @RequiredArgsConstructor
 @Service
@@ -30,7 +25,6 @@ public class ServerImplementation implements ServerService {
     @Override
     public Server create(Server server) {
         log.info("Saving new server: {}", server.getName());
-        //server.setImageUrl(setServerImageUrl());
         return serverRepo.save(server);
     }
 

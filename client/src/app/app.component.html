@@ -5,8 +5,7 @@
             <h1 style="margin: 5px 0 5px 10px;">Orb: Server Manager</h1>
         </div>
         <div class="buttons-nav__wrap">
-            <button mat-raised-button>Filter</button>
-            <button mat-raised-button>Add server</button>
+            <button mat-raised-button (click)="addServer()">Add server</button>
             <button 
             mat-raised-button 
             (click)="toggleTerminal()" 
@@ -52,6 +51,7 @@
                                         <img src="../assets/image/orb-red.svg" alt="" width="48" height="48">
                                     </ng-template>
                                 </td>
+                                
                                 <td class="servers-table__button-wrap">
                                     <button mat-raised-button (click)="pingServer(server.ipAddress)">
                                         <i class="material-icons" *ngIf="(filterStatus$ | async) === '' || (filterStatus$ | async) !== server.ipAddress" title="Ping">&#xe328;</i>
@@ -74,12 +74,21 @@
                 </div>
                 
                 
-                <ng-container *ngIf="viewTerminal">
+                <ng-container>
                     <div 
                     class="terminal" 
                     [ngStyle]="(viewTerminal === true) ? {'display': 'block'} : {'display': 'none'}"
                     >
                         <iframe src="http://localhost:8081/" frameborder="0" width="100%" height="300"></iframe>
+                    </div>
+                </ng-container>
+
+                <ng-container>
+                    <div 
+                    class="add-form" 
+                    [ngStyle]="(addingServer === true) ? {'display': 'block'} : {'display': 'none'}"
+                    >
+                        <div>Add server</div>
                     </div>
                 </ng-container>
             </ng-container>
