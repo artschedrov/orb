@@ -21,27 +21,28 @@ public class ServerApplication {
 
 	}
 
-	@Bean
-	CommandLineRunner run(ServerRepo serverRepo) {
-		return args -> {
-			serverRepo.save(new Server(
-					null,
-					"192.168.1.160",
-					"Fedora Server",
-					"16 GB",
-					"Virtual server",
-					Status.SERVER_UP
-			));
-			serverRepo.save(new Server(
-					null,
-					"192.122.1.16",
-					"Ubuntu Server",
-					"8 GB",
-					"Virtual server",
-					Status.SERVER_UP
-			));
-		};
-	}
+//	@Bean
+//	CommandLineRunner run(ServerRepo serverRepo) {
+//		return args -> {
+////			serverRepo.save(new Server(
+////					null,
+////					"192.168.1.160",
+////					"Fedora Server",
+////					"16 GB",
+////					"Virtual server",
+////					Status.SERVER_UP
+////			));
+////			serverRepo.save(new Server(
+////					null,
+////					"192.122.1.16",
+////					"Ubuntu Server",
+////					"8 GB",
+////					"Virtual server",
+////					Status.SERVER_UP
+////			));
+//			serverRepo.findAll();
+//		};
+//	}
 
 	@Bean
 	public CorsFilter corsFilter() {

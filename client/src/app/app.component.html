@@ -4,9 +4,9 @@
             <img src="../assets/image/orb-logo.png" alt="" style="width: 50px;">
             <h1 style="margin: 5px 0 5px 10px;">Orb: Server Manager</h1>
         </div>
-        <div class="buttons-nav__wrap">
+        <!-- <div class="buttons-nav__wrap">
             <button mat-raised-button (click)="addServer()">Add server</button>
-        </div>
+        </div> -->
     </div>
     <div class="servers-container">
         <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
@@ -77,26 +77,52 @@
                     </div>
                 </ng-container>
 
-                <!-- <ng-container>
-                    <div 
-                    class="add-form" 
-                    [ngStyle]="(addingServer === true) ? {'display': 'block'} : {'display': 'none'}"
-                    >
-                        <div>Add server</div>
-                    </div>
-                </ng-container> -->
+                
                 <mat-accordion>
-                    <!-- <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
                       <mat-expansion-panel-header>
                         <mat-panel-title>
-                          This is the expansion title
+                          Add server
                         </mat-panel-title>
-                        <mat-panel-description>
-                          This is a summary of the content
-                        </mat-panel-description>
                       </mat-expansion-panel-header>
-                      <p>This is the primary content of the panel.</p>
-                    </mat-expansion-panel> -->
+                      <div 
+                        class="add-form" 
+                      >
+                      <form #serverForm="ngForm" (submit)="saveServer(serverForm)">
+                        <div>Add server</div>
+                        <div>
+                            <div>
+                                <label>IP</label>
+                                <input type="text" name="ipAddress" ngModel class="" required>
+                            </div>
+                            <div>
+                                <label>Name</label>
+                                <input type="text" name="name" ngModel class="" required>
+                            </div>
+                            <div>
+                                <label>Memory</label>
+                                <input type="text" name="memory" ngModel class="" required>
+                            </div>
+                            <div>
+                                <label>Type</label>
+                                <input type="text" name="type" ngModel class="" required>
+                            </div>
+                            <div>
+                                <label>Status</label>
+                                <select name="status" ngModel="SERVER_DOWN" >
+                                    <option value="SERVER_UP">SERVER UP</option>
+                                    <option value="SERVER_DOWN">SERVER DOWN</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" [disabled]="serverForm.invalid">Add</button>
+                            <button type="button">Cancel</button>
+                        </div>
+                    </form>
+                      </div>
+                    </mat-expansion-panel>
                     <mat-expansion-panel (opened)="panelOpenState = true"
                                          (closed)="panelOpenState = false">
                       <mat-expansion-panel-header>
