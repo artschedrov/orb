@@ -1,8 +1,11 @@
 <div class="servers">
     <div class="servers-navbar">
-        <div class="servers-navbar__logo">
-            <img src="../assets/image/orb-logo.png" alt="" style="width: 50px;">
-            <h1 style="margin: 5px 0 5px 10px;">Orb: Server Manager</h1>
+        <div>
+            <a href="/" class="servers-navbar__logo">
+                <img src="../assets/image/orb-logo.png" alt="" style="width: 50px;">
+                <h1 style="margin: 5px 0 5px 10px;">Orb: Server Manager</h1>
+            </a>
+            
         </div>
         <!-- <div class="buttons-nav__wrap">
             <button mat-raised-button (click)="addServer()">Add server</button>
@@ -39,10 +42,10 @@
                                 <td>{{ server.type }}</td>
                                 <td>
                                     <div *ngIf="server.status == 'SERVER_UP'; else elseBlock">
-                                        <img src="../assets/image/orb-green.svg" alt="" width="48" height="48">
+                                        <img src="../assets/image/orb-green.svg" alt="" width="52" height="52">
                                     </div>
                                     <ng-template #elseBlock>
-                                        <img src="../assets/image/orb-red.svg" alt="" width="48" height="48">
+                                        <img src="../assets/image/orb-red.svg" alt="" width="52" height="52">
                                     </ng-template>
                                 </td>
                                 
@@ -52,14 +55,14 @@
                                         <i class="material-icons" *ngIf="(filterStatus$ | async) === server.ipAddress" title="Check">cached</i>
                                     </button>
                                 </td>
-                                <td class="servers-table__button-wrap">
+                                <!-- <td class="servers-table__button-wrap">
                                     <button mat-raised-button>
                                         <i class="material-icons">edit</i>
                                     </button>
-                                </td>
+                                </td> -->
                                 <td class="servers-table__button-wrap">
-                                    <button mat-raised-button color="warn">
-                                        <i class="material-icons">delete</i>
+                                    <button mat-raised-button (click)="deleteServer(server)">
+                                        <i class="material-icons button--red">delete</i>
                                     </button>
                                 </td>
                             </tr>
