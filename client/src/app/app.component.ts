@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
   addingServer: boolean = false;
   panelOpenState = false;
 
-
   constructor(private serverService: ServerService) {}
 
   ngOnInit(): void {

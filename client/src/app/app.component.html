@@ -35,17 +35,17 @@
                         </thead>
                         <tbody class="servers-table__body" *ngFor="let server of appState.appData.data.servers; let i = index">
                             <tr>
-                                <td><img src="../assets/image/server.png" alt="server.name" width="40" height="40"></td>
+                                <td><i class="material-icons">storage</i></td>
                                 <td>{{ server.ipAddress }}</td>
                                 <td>{{ server.name }}</td>
                                 <td>{{ server.memory }}</td>
                                 <td>{{ server.type }}</td>
                                 <td>
                                     <div *ngIf="server.status == 'SERVER_UP'; else elseBlock">
-                                        <img src="../assets/image/orb-green.svg" alt="" width="52" height="52">
+                                        <img class="status__img" src="../assets/image/orb-green.svg" alt="" width="52" height="52">
                                     </div>
                                     <ng-template #elseBlock>
-                                        <img src="../assets/image/orb-red.svg" alt="" width="52" height="52">
+                                        <img class="status__img" src="../assets/image/orb-red.svg" alt="" width="52" height="52">
                                     </ng-template>
                                 </td>
                                 
@@ -55,19 +55,17 @@
                                         <i class="material-icons" *ngIf="(filterStatus$ | async) === server.ipAddress" title="Check">cached</i>
                                     </button>
                                 </td>
-                                <!-- <td class="servers-table__button-wrap">
-                                    <button mat-raised-button>
-                                        <i class="material-icons">edit</i>
-                                    </button>
-                                </td> -->
+                                 
                                 <td class="servers-table__button-wrap">
                                     <button mat-raised-button (click)="deleteServer(server)">
                                         <i class="material-icons button--red">delete</i>
                                     </button>
                                 </td>
                             </tr>
-                        </tbody> 
+                        </tbody>
                     </table>
+
+                    
                 </div>
                 
                 
@@ -86,6 +84,7 @@
                                          (closed)="panelOpenState = false">
                       <mat-expansion-panel-header>
                         <mat-panel-title>
+                            <i class="material-icons btn-panel">add</i>
                           Add server
                         </mat-panel-title>
                       </mat-expansion-panel-header>
@@ -130,6 +129,7 @@
                                          (closed)="panelOpenState = false">
                       <mat-expansion-panel-header>
                         <mat-panel-title>
+                            <i class="material-icons btn-panel">featured_play_list</i>
                           Terminal
                         </mat-panel-title>
                       </mat-expansion-panel-header>
