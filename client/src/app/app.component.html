@@ -16,7 +16,7 @@
 
             <ng-container *ngSwitchCase="DataState.LOADING">
                 <div style="position: absolute; top: 50%; left: 50%;">
-                    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                    <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
                 </div>
             </ng-container>
             <ng-container *ngSwitchCase="DataState.LOADED">
