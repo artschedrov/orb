@@ -4,4 +4,4 @@ Orb
 </h1>
 <p align="center"><strong>Very simple server manager</strong>.</p>
 
-<a href="#"><img src="./images/Screen3.png" style="width: 500px"/></a><br />
+<a href="#"><img src="./images/Screen3.png" style="width: 1500px"/></a><br />
