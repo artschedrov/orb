@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/smdb
-    username: art
-    password: art
+    username: user
+    password: 123
   jpa:
     hibernate:
       ddl-auto: update
