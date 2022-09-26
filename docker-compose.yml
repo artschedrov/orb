@@ -21,14 +21,6 @@ services:
       - backend
       - frontend
 
-  terminal:
-    build:
-      context: cloudterm
-      dockerfile: Dockerfile
-    ports:
-      - "8082:8082"
-    restart: always
-
   # Frontend Service
   app-client:
     build:
