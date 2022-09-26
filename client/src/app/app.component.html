@@ -5,7 +5,7 @@
                 <img src="../assets/image/orb-logo.png" alt="" style="width: 50px;">
                 <h1 style="margin: 5px 0 5px 10px;">Orb: Server Manager</h1>
             </a>
-            
+
         </div>
         <!-- <div class="buttons-nav__wrap">
             <button mat-raised-button (click)="addServer()">Add server</button>
@@ -48,14 +48,14 @@
                                         <img class="status__img" src="../assets/image/orb-red.svg" alt="" width="52" height="52">
                                     </ng-template>
                                 </td>
-                                
+
                                 <td class="servers-table__button-wrap">
                                     <button mat-raised-button (click)="pingServer(server.ipAddress)">
                                         <i class="material-icons" *ngIf="(filterStatus$ | async) === '' || (filterStatus$ | async) !== server.ipAddress" title="Ping">&#xe328;</i>
                                         <i class="material-icons" *ngIf="(filterStatus$ | async) === server.ipAddress" title="Check">cached</i>
                                     </button>
                                 </td>
-                                 
+
                                 <td class="servers-table__button-wrap">
                                     <button mat-raised-button (click)="deleteServer(server)">
                                         <i class="material-icons button--red">delete</i>
@@ -65,20 +65,20 @@
                         </tbody>
                     </table>
 
-                    
-                </div>
-                
-                
-                <ng-container>
-                    <div 
-                    class="terminal" 
-                    [ngStyle]="(viewTerminal === true) ? {'display': 'block'} : {'display': 'none'}"
-                    >
-                        <iframe src="http://localhost:8081/" frameborder="0" width="100%" height="300"></iframe>
-                    </div>
-                </ng-container>
 
-                
+                </div>
+
+
+<!--                <ng-container>-->
+<!--                    <div-->
+<!--                    class="terminal"-->
+<!--                    [ngStyle]="(viewTerminal === true) ? {'display': 'block'} : {'display': 'none'}"-->
+<!--                    >-->
+<!--                        <iframe src="http://localhost:8082/" frameborder="0" width="100%" height="300"></iframe>-->
+<!--                    </div>-->
+<!--                </ng-container>-->
+
+
                 <mat-accordion>
                     <mat-expansion-panel (opened)="panelOpenState = true"
                                          (closed)="panelOpenState = false">
@@ -88,8 +88,8 @@
                           Add server
                         </mat-panel-title>
                       </mat-expansion-panel-header>
-                      <div 
-                        class="add-form" 
+                      <div
+                        class="add-form"
                       >
                       <form #serverForm="ngForm" (submit)="saveServer(serverForm)">
                         <div>Add server</div>
@@ -133,10 +133,10 @@
                           Terminal
                         </mat-panel-title>
                       </mat-expansion-panel-header>
-                      <div 
-                        class="terminal" 
+                      <div
+                        class="terminal"
                       >
-                        <iframe src="http://localhost:8081/" frameborder="0" width="100%" height="300"></iframe>
+                        <iframe src="http://localhost:8082/" frameborder="0" width="100%" height="300"></iframe>
                       </div>
                     </mat-expansion-panel>
                   </mat-accordion>
