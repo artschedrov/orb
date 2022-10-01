@@ -5,6 +5,14 @@ Orb
 <p align="center"><strong>Very simple server manager</strong>.</p>
 
 ## About
-<a href="#"><img src="./images/Screen3.png" style="width:1500px"/></a><br />
+Orb is a web server manager, with ping and terminal support.
+
+<a href="#"><img src="./images/Screen3.png" style="width:700px"/></a><br />
 ## Install
+You can run this with the commands
+``` shell
+git clone https://github.com/artschedrov/orb.git
+cd orb
+bash run.sh
+```
 ## License
