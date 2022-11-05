@@ -16,4 +16,4 @@ cd orb
 bash run.sh
 ```
 ## License
-This software is licensed under MIT. See the [LICENSE.md](https://github.com/artschedrov/orb/blob/main/LICENSE.md) file for more information.
+This software is licensed under MIT. See the [LICENSE.md](https://github.com/artschedrov/orb/blob/main/LICENSE) file for more information.
